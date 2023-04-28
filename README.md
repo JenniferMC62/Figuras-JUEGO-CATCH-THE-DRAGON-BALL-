@@ -32,3 +32,17 @@ Nivel 3     |     5 0 0 0     PUNTOS
 <br>
 -->  El valor en puntos de las bolas que se atrapen depende del valor numerico de su tamaño (se generan aleatoriamente).
 
+
+<br>
+<div/>
+
+# Diagrama UML
+[Diagrama](./Diagrama%20UML/)
+
+<br>
+<div/>
+
+# Referencias 
+[Referencias para la creación del juego](./Referencias/)
+
+
