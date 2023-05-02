@@ -1,0 +1,256 @@
+# **Explicación del Código (Detallada)**
+
+<div style="text-align: justify">
+
+Iniciamos declarando las variables (**"let"** ya que solo pueden ser actualizadas dentro del ámbito en el que se declararon).
+
+<br>
+<div/>
+
+```javascript
+let movingObjects = []; // Creamos un array (arreglo) vacío que se utiliza para almacenar objetos que estarán en movimiento durante el juego 
+```
+
+```javascript
+let ballTimer = 0; // Variable numérica que se inicializamos en 0 y se utiliza para hacer un seguimiento del tiempo transcurrido desde que se lanzó la bola
+
+let score = 0; // Inicializamos la variable "score" en 0 y se utiliza para hacer un seguimiento de la puntuación del jugador
+
+let level = 0; // Inicializamos la variable "level" en 0 y se utiliza para hacer un seguimiento del nivel actual del jugador
+
+let dragonColor = "green"; // Inicializamos la variable "dragonColor" en "green" y se utiliza para definir el color del dragón en el juego (la bola principal)
+
+```
+
+```javascript
+let winnerButton; // Declaramos la variable "winnerButton" sin inicializarla, significa que podemos asignarle un valor más adelante
+
+let scorePosition; // Declaramos la variable "scorePosition" sin inicializarla, significa que podemos asignarle un valor más adelante (donde ubicaremos la posición del letrero de la puntuación del jugardor)
+
+let levelPosition; // Declaramos la variable "levelPosition" sin inicializarla, significa que podemos asignarle un valor más adelante (donde ubicaremos la posición del letrero del nivel del jugardor)
+```
+<br>
+<div/>
+
+En esta parte del código tenemos la función **"setup"** en donde:
+
+<br>
+<div/>
+
+- Creamos un canvas de 400x400 píxeles
+<br>
+<div/>
+
+- Inicializamos **"scorePosition"** y **"levelPosition"** con vectores de posición
+<br>
+<div/>
+
+- Creamos un nuevo objeto de tipo Dragon al array (arreglo) **"movingObjects"**.
+
+<br>
+<div/>
+
+```javascript
+function setup() {
+
+  createCanvas(400, 400);   // Creamos un canvas de 400x400 píxeles
+
+  movingObjects.push(new Dragon());   // Agregamos un nuevo objeto de tipo Dragon al array "movingObjects"
+
+  scorePosition = createVector(10, 30);  // Creamos un vector con coordenadas (10, 30) y lo asignamos a la variable "scorePosition"
+  levelPosition = createVector(width - 10, 30); // Creamos un vector con coordenadas (ancho - 10, 30) y lo asignamos a la variable "levelPosition"
+
+}
+```
+<br>
+<div/>
+
+Aquí tenemos la función **draw()** donde primero establecemos el color de fondo en gris claro
+
+<br>
+<div/>
+
+```javascript
+function draw() {
+  // Establecemos el color de fondo en gris claro
+  background(220);
+```
+<br>
+
+En la misma función **draw()** también tenemos un ciclo **"for of"** para iterar a través de cada objeto en el array movingObjects y creamos una variable **"object"** para cada elemento del arreglo.
+
+<br>
+
+
+Y tenemos una condición **if** que comprueba si el objeto es una instancia de la clase **Ball** y si está fuera de la pantalla utilizando el método **isOffscreen()**. Si es así, el objeto se elimina del array **movingObjects** utilizando el método **splice()**. La expresión **movingObjects.indexOf(object)** devuelve el índice del objeto en el array y 1 indica que se debe eliminar solo un elemento en esa posición.
+
+<br>
+<div/>
+
+
+```javascript
+// Iteramos a través de cada objeto en el array "movingObjects"
+  for (let object of movingObjects) {
+
+    // Llama al método show() para mostrar el objeto en la pantalla
+    object.show();
+    // Llama al método move() para mover el objeto
+    object.move();
+
+    // Si el objeto es una pelota y está fuera de la pantalla, lo eliminamos del array "movingObjects"
+    if (object instanceof Ball && object.isOffscreen()) {
+      movingObjects.splice(movingObjects.indexOf(object), 1);
+    }
+```
+<br>
+<div/>
+
+Continuamos en la función **draw()** con el siguiente **if** el cual tiene dos diferentes condiciones:
+
+<br>
+<div/>
+
+- La primera condición, **object instanceof Ball**, comprueba si el objeto es una pelota. Si el objeto no es una pelota, la expresión completa devolverá false y no se ejecutará el bloque de código que sigue.
+
+<br>
+<div/>
+
+- La segunda condición, **movingObjects[0].hits(object)**, comprueba si el objeto colisiona con la primera pelota en el arreglo **movingObjects**. La función **hits()** verifica si el objeto y la pelota chocan (hits - golpear) en la pantalla. Si la pelota y el objeto no colisionan, la expresión completa devuelve false y no se ejecuta el bloque de código que sigue.
+
+<br>
+<div/>
+
+Si ambas condiciones son verdaderas, significa que la pelota y el objeto colisionan. En ese caso, el valor de la pelota se suma a la variable **score**, que lleva el registro de la puntuación del jugador. La variable **object.value** se refiere al valor numérico asignado a cada pelota en la función **Ball()**.
+
+<br>
+<div/>
+
+```javascript
+    // Si el objeto es una pelota y la primera pelota en el array "movingObjects" colisiona con ella,
+    // actualizamos la puntuación y comprobamos si se cumple alguna condición de nivel
+    if (object instanceof Ball && movingObjects[0].hits(object)) {
+      score += object.value; // Incrementamos la puntuación según el valor de la pelota
+```
+
+<br>
+<div/>
+
+Después de actualizar la puntuación, el bloque de código verifica si se ha alcanzado un cierto nivel y actualiza las variables **level** y **dragonColor**.
+
+<br>
+<div/>
+
+- Si el puntaje es **mayor o igual a 1000 y el nivel actual es 0**, se actualiza el nivel a 1 y se cambia el color del dragón a azul.
+
+<br>
+<div/>
+
+- Si el puntaje es **mayor o igual a 2500 y el nivel actual es 1**, se actualiza el nivel a 2 y se cambia el color del dragón a morado. 
+
+<br>
+<div/>
+
+- Si el puntaje es **mayor o igual a 5000 y el nivel actual es 2**, se actualiza el nivel a 3 y se cambia el color del dragón a rojo.
+
+
+<br>
+<div/>
+
+
+```javascript
+      // Comprobamos si se cumple alguna condición de nivel y actualizamos la variable "level" y "dragonColor" en consecuencia
+      if (score >= 1000 && level === 0) {
+        level = 1;
+        dragonColor = "blue";
+      } else if (score >= 2500 && level === 1) {
+        level = 2;
+        dragonColor = "purple";
+      } else if (score >= 5000 && level === 2) {
+        level = 3;
+        dragonColor = "red";
+```
+
+<br>
+<div/>
+
+Continuando en la función **draw()** si el jugador a ganado el juego Esta parte del código es responsable de mostrar un mensaje de "ganador" cuando el jugador ha alcanzado un puntaje determinado en el juego. En este caso, cuando el jugador alcanza un puntaje de al menos 5000 puntos y ha alcanzado el nivel 3 del juego, el juego se detiene y se muestra un mensaje de "WINNER" en la pantalla.
+
+<br>
+<div/>
+
+- La función **noLoop()** se llama para detener el bucle de dibujo y detener el juego.
+
+- La función **background(220)** se llama para dibujar un fondo gris claro en la pantalla.
+
+- la función **textSize(50)** se llama para establecer el tamaño de la fuente del mensaje de ganador en 50 píxeles.
+
+- La función **textAlign(CENTER, CENTER)** se utiliza para centrar el texto horizontal y verticalmente en la pantalla.
+
+- La función **fill("black")** se utiliza para establecer el color del texto en negro.
+
+- La función **text("WINNER", width / 2, height / 2)** se llama para dibujar el texto "WINNER" en el centro de la pantalla, utilizando las variables **width** y **height** para determinar la posición central de la pantalla.
+
+<br>
+<div/>
+
+
+
+```javascript
+        // Si el jugador ha llegado al nivel 3 y ha obtenido al menos 5000 puntos, se detiene el juego y se muestra un mensaje de ganador
+        noLoop();
+        background(220);
+        textSize(50);
+        textAlign(CENTER, CENTER);
+        fill("black");
+        text("WINNER", width / 2, height / 2);
+```
+
+
+<br>
+<div/>
+
+Después creamos un botón en la pantalla que permite al jugador volver a jugar después de haber ganado el juego.
+
+<br>
+<div/>
+
+```javascript
+        // Creamos un botón para volver a jugar y lo mostramos en la pantalla
+
+        winnerButton = createButton('Play Again'); // Creamos un nuevo botón y lo asigna a la variable winnerButton. 'Play Again' es el texto que se muestra en el botón
+
+        winnerButton.position(width/2 - 50, height/2 + 40); // width/2 - 50 establece la posición horizontal del botón en el centro de la pantalla con un desplazamiento de 50 píxeles hacia la izquierda, mientras que height/2 + 40 establece la posición vertical del botón en el centro de la pantalla con un desplazamiento de 40 píxeles hacia abajo
+
+        winnerButton.mousePressed(playAgain); //  establece una función playAgain que se ejecutará cuando se haga clic en el botón
+      }
+```
+
+<br>
+<div/>
+
+En esta parte del código se elimina la pelota del array **"movingObjects"** si cumple dos condiciones:
+
+<br>
+<div/>
+
+1. Es una instancia de la clase **"Ball"**.
+2. Ha salido de la pantalla.
+
+<br>
+<div/>
+
+Si ambas condiciones se cumplen, entonces la pelota se elimina del array mediante el método **splice()**. En este caso, se utiliza el método **indexOf()** para encontrar el índice de la pelota en el array **"movingObjects"**, y se especifica 1 como el número de elementos a eliminar, ya que solo se quiere eliminar la pelota actual. 
+
+<br>
+<div/>
+
+
+```javascript
+     // Eliminamos la pelota del array "movingObjects"
+      movingObjects.splice(movingObjects.indexOf(object), 1);
+    }
+  }
+```
+
+<br>
+<div/>
