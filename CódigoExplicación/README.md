@@ -319,3 +319,27 @@ Si se cumple la condición, se crea una nueva instancia de la clase **"Ball"** y
 <div/>
 
 ## **Función playAgain()**
+
+<br>
+<div/>
+
+Esta función se llama cuando se hace clic en el botón **"Play Again"** y se utiliza para reiniciar el juego después de que el jugador gane.
+
+<br>
+<div/>
+
+```javascript
+// Reinicia las variables del juego y crea un nuevo objeto Dragon.
+function playAgain() {
+  winnerButton.remove(); // Elimina el botón "Play Again".
+  movingObjects = []; // Vacía el arreglo de objetos móviles.
+  score = 0; // Reinicia la puntuación a cero.
+  level = 0; // Reinicia el nivel a cero.
+  dragonColor = "green"; // Restablece el color del dragón a verde.
+  movingObjects.push(new Dragon()); // Crea un nuevo objeto Dragon y lo agrega al arreglo de objetos móviles.
+  loop(); // Reanuda el bucle de dibujo.
+}
+```
+
+<br>
+<div/>
