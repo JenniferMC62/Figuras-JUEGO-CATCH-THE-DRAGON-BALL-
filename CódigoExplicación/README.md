@@ -466,6 +466,16 @@ Por último se implementa el método **hits** el cual recibe como parámetro otr
 <br>
 <div/>
 
+Primero, se calcula la distancia entre el centro del dragón (representado por sus coordenadas x y y) y el centro del objeto que se pasa como parámetro (también representado por sus coordenadas x y y). Esto se hace utilizando la función **dist()**, que calcula la distancia euclidiana entre dos puntos en un plano cartesiano.
+
+<br>
+<div/>
+
+Luego, se compara esta distancia con la suma de los radios del dragón y el objeto. Si la distancia es menor que esta suma, significa que los dos objetos están colisionando y, por lo tanto, el método retorna true. En caso contrario, retorna false.
+
+<br>
+<div/>
+
 ```javascript
 // Método que verifica si el dragón colisiona con otro objeto
 hits(object) {
