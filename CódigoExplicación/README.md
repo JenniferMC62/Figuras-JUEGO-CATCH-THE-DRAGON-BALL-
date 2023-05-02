@@ -343,3 +343,142 @@ function playAgain() {
 
 <br>
 <div/>
+
+## **Clase MovingObject**
+
+<br>
+<div/>
+
+En esta parte definimos la clase **"MovingObject"** que representa un objeto móvil en el juego. 
+
+<br>
+<div/>
+
+La clase tiene un constructor que inicializa las propiedades **"size"** (tamaño), **"color"**, **"x"** y **"y"** (posiciones). 
+
+<br>
+<div/>
+
+También tiene tres métodos: 
+
+<br>
+<div/>
+
+- **show()** que dibuja el objeto en la pantalla, utilizando el tamaño y el color especificados. 
+- **move()** que no tiene implementación en la clase base, y se espera que se implemente en las subclases para proporcionar un comportamiento de movimiento específico para cada tipo de objeto móvil.
+- **hits()** que se se espera implementar en las subclases para proporcionar un comportamiento específico de colisión para cada tipo de objeto móvil.
+
+<br>
+<div/>
+
+
+```javascript
+class MovingObject {
+  constructor() {
+    this.size = 0; // El tamaño del objeto.
+    this.color = ""; // El color del objeto.
+    this.x = 0; // La posición X del objeto.
+    this.y = 0; // La posición Y del objeto.
+  }
+
+  // Muestra el objeto en la pantalla.
+  show() {
+    fill(this.color); // Establece el color de relleno del objeto.
+    ellipse(this.x, this.y, this.size, this.size); // Dibuja una elipse en la posición del objeto con el tamaño especificado.
+  }
+
+  // Mueve el objeto.
+  move() {
+    // Esta función se implementa en las subclases para proporcionar un comportamiento de movimiento específico para cada tipo de objeto móvil.
+  }
+
+  // Verifica si este objeto colisiona con otro objeto.
+  hits(object) {
+    // Esta función se implementa en las subclases para proporcionar un comportamiento específico de colisión para cada tipo de objeto móvil.
+  }
+}
+```
+
+## **Clase Dragon**
+
+<br>
+<div/>
+
+Aquí tenemos una subclase llamada **"Dragon"** que hereda de la clase **"MovingObject"**. Tiene un constructor que inicializa las variables específicas del dragón, como su tamaño, posición, velocidad y color. 
+
+<br>
+<div/>
+
+```javascript
+// Clase Dragon que hereda de la clase MovingObject
+class Dragon extends MovingObject {
+// Constructor de la clase Dragon
+constructor() {
+super(); // Llama al constructor de la clase padre
+this.x = width / 2;
+this.y = height / 2;
+this.speed = 5;
+this.size = 30;
+this.color = "green";
+}
+```
+
+<br>
+<div/>
+
+También tiene un método **"move()"** que controla el movimiento del dragón en la pantalla. En este método, se verifica si las flechas izquierda, derecha, arriba o abajo están presionadas usando las funciones **keyIsDown()**. Dependiendo de la tecla presionada, la posición x o y del dragón se incrementa o decrementa por el valor de **this.speed**.
+
+<br>
+<div/>
+
+Además, el movimiento del dragón se restringe a los límites de la pantalla usando la función **constrain()**. El primer parámetro es el valor que se quiere restringir, el segundo es el valor mínimo permitido y el tercer parámetro es el valor máximo permitido. 
+
+<br>
+<div/>
+
+```javascript
+// Método para mover el dragón
+move() {
+if (keyIsDown(LEFT_ARROW)) { // Si se presiona la flecha izquierda
+this.x -= this.speed; // Disminuye la posición x del dragón
+}
+if (keyIsDown(RIGHT_ARROW)) { // Si se presiona la flecha derecha
+this.x += this.speed; // Aumenta la posición x del dragón
+}
+if (keyIsDown(UP_ARROW)) { // Si se presiona la flecha arriba
+this.y -= this.speed; // Disminuye la posición y del dragón
+}
+if (keyIsDown(DOWN_ARROW)) { // Si se presiona la flecha abajo
+this.y += this.speed; // Aumenta la posición y del dragón
+}
+// Restringe el movimiento del dragón a los límites de la pantalla
+this.x = constrain(this.x, 0 + this.size / 2, width);
+this.y = constrain(this.y, 0 + this.size / 2, height - this.size / 2);
+}
+
+```
+
+<br>
+<div/>
+
+Por último se implementa el método **hits** el cual recibe como parámetro otro objeto y verifica si hay una colisión entre el dragón y ese objeto.
+
+<br>
+<div/>
+
+```javascript
+// Método que verifica si el dragón colisiona con otro objeto
+hits(object) {
+let d = dist(this.x, this.y, object.x, object.y); // Calcula la distancia entre el dragón y el objeto
+return d < (this.size / 2 + object.size / 2); // Retorna true si la distancia es menor a la suma de los radios del dragón y el objeto
+}
+}
+```
+
+<br>
+<div/>
+
+
+
+
+
