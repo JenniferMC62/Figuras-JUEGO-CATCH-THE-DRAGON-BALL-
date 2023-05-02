@@ -254,3 +254,49 @@ Si ambas condiciones se cumplen, entonces la pelota se elimina del array mediant
 
 <br>
 <div/>
+
+Luego mostramos la puntuación y el nivel actual del jugador en la pantalla del juego.
+
+<br>
+<div/>
+
+```javascript
+
+  // Mostramos la puntuación y el nivel en la pantalla
+
+  fill(0); // Para que sea negro
+
+  textSize(20); // Se establece el tamaño del texto
+
+// Indica que el texto "Score" estará alineado a la izquierda y en la parte superior de la pantalla
+  textAlign(LEFT, TOP);
+  text("Score: " + score, scorePosition.x, scorePosition.y);
+
+// El texto "Level" estará alineado a la derecha y también en la parte superior de la pantalla
+  textAlign(RIGHT, TOP);
+  text("Level: "+ level, levelPosition.x, levelPosition.y);
+```
+
+<br>
+<div/>
+
+Por último en la función **draw()** tenemos la siguiente condición en donde se verifica que el nivel actual sea menor que 3 y la puntuación del jugador sea menor que 5000. Además, hay una probabilidad del 2% de que se añada una nueva pelota en cada iteración del bucle principal. Esto se logra mediante el uso de la función **"random()"**, que devuelve un número aleatorio entre 0 y 1, y comprobando si el número aleatorio es menor que 0.02
+
+<br>
+<div/>
+
+Si se cumple la condición, se crea una nueva instancia de la clase **"Ball"** y se agrega al array **"movingObjects"** usando la función **"push()"**.
+
+<br>
+<div/>
+
+```javascript
+  // Si el nivel es menor que 3, la puntuación es menor que 5000 y se cumple una probabilidad del 2%, agregamos una nueva pelota al array "movingObjects"
+  if (random() < 0.02 && level < 3 && score < 5000) {
+    movingObjects.push(new Ball());
+  }
+}
+```
+
+<br>
+<div/>
