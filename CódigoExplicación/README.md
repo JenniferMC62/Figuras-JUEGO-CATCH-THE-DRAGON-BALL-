@@ -399,6 +399,9 @@ class MovingObject {
 }
 ```
 
+<br>
+<div/>
+
 ## **Clase Dragon**
 
 <br>
@@ -483,6 +486,48 @@ let d = dist(this.x, this.y, object.x, object.y); // Calcula la distancia entre 
 return d < (this.size / 2 + object.size / 2); // Retorna true si la distancia es menor a la suma de los radios del dragón y el objeto
 }
 }
+```
+
+<br>
+<div/>
+
+## **Clase Ball**
+
+<br>
+<div/>
+
+En esta parte del código se define la clase **Ball** que hereda de la clase **MovingObject**. La clase **Ball**, al igual que Dragon, tiene un constructor que define varias propiedades de una bola, como su posición inicial, velocidad, tamaño, color y valor.
+
+<br>
+<div/>
+
+- La posición inicial de la bola se establece en el borde derecho de la pantalla (width), y su posición vertical se elige aleatoriamente entre las posibles alturas de la pantalla (height).
+
+- La velocidad se elige aleatoriamente entre 2 y 5, y el tamaño se elige aleatoriamente entre 10 y 30. 
+
+- El color se elige aleatoriamente mediante el uso de la función **color**, que toma tres argumentos que especifican los valores de rojo, verde y azul (RGB) de la bola.
+
+- El valor de la pelota se calcula mediante el uso de la función **map**, que toma cinco argumentos: el valor a mapear, el valor mínimo y máximo del rango de entrada, y el valor mínimo y máximo del rango de salida. En este caso, el tamaño de la pelota se mapea desde el rango de 10 a 30 a un valor entre 100 y 500, que se utiliza para calcular la puntuación del jugador cuando se recoge la pelota.
+
+
+<br>
+<div/>
+
+```javascript
+// Define la clase Ball que hereda de MovingObject
+class Ball extends MovingObject {
+  constructor() {
+    // Llama al constructor de la clase padre
+    super();
+    // Define las propiedades de la pelota
+    this.x = width;
+    this.y = random(height);
+    this.speed = random(2, 5);
+    this.size = random(10, 30);
+    this.color = color(random(255), random(255), random(255));
+    // Define el valor de la pelota en base a su tamaño
+    this.value = Math.round(map(this.size, 10, 30, 100, 500));
+  }
 ```
 
 <br>
