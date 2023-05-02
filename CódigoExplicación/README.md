@@ -533,6 +533,43 @@ class Ball extends MovingObject {
 <br>
 <div/>
 
+Luego se define el método **move()** de la clase **Ball** en donde primero se actualiza la posición de la pelota en el eje x, restando la velocidad de la pelota (**this.speed**) a la posición actual de la pelota en el eje x (**this.x**). De esta forma, la pelota se mueve hacia la izquierda. Y después agregamos un movimiento aleatorio en el eje y, sumando un valor aleatorio entre -1 y 1 a la posición actual de la pelota en el eje y (**this.y**). Con esto actualizamos la posición de la pelota.
+
+<br>
+<div/>
+
+```javascript
+  // Define el método move de la pelota
+  move() {
+    // Actualiza la posición de la pelota en el eje x
+    this.x -= this.speed;
+    // Mueve la pelota aleatoriamente en el eje y
+    this.y += random(-1, 1); 
+  }
+```
+
+<br>
+<div/>
+
+Por último definimos el método **isOffscreen** que se utiliza para determinar si una pelota ha salido de la pantalla. Verifica si la posición de la pelota en el eje x es menor que cero, lo que significa que la pelota ha desaparecido por la izquierda de la pantalla y ya no es visible. Si la pelota ha salido de la pantalla, el método devuelve true, lo que indica que la pelota debe ser eliminada del juego.
+
+<br>
+<div/>
+
+```javascript
+  // Define el método isOffscreen de la pelota
+  isOffscreen() {
+    // Devuelve verdadero si la pelota está fuera de la pantalla
+    return (this.x < 0);
+  }
+}
+```
+
+<br>
+<div/>
+
+Con esto finaliza la explicación completa del programa :)
+
 
 
 
