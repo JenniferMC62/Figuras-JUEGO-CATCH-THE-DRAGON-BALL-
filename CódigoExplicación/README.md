@@ -1,5 +1,10 @@
 # **Explicación del Código (Detallada)**
 
+## **Declaración de Variables**
+
+<br>
+<div/>
+
 <div style="text-align: justify">
 
 Iniciamos declarando las variables (**"let"** ya que solo pueden ser actualizadas dentro del ámbito en el que se declararon).
@@ -29,6 +34,12 @@ let scorePosition; // Declaramos la variable "scorePosition" sin inicializarla, 
 
 let levelPosition; // Declaramos la variable "levelPosition" sin inicializarla, significa que podemos asignarle un valor más adelante (donde ubicaremos la posición del letrero del nivel del jugardor)
 ```
+
+<br>
+<div/>
+
+## **Función setup()**
+
 <br>
 <div/>
 
@@ -62,6 +73,12 @@ function setup() {
 
 }
 ```
+
+<br>
+<div/>
+
+## **Función draw()**
+
 <br>
 <div/>
 
@@ -300,3 +317,5 @@ Si se cumple la condición, se crea una nueva instancia de la clase **"Ball"** y
 
 <br>
 <div/>
+
+## **Función playAgain()**
