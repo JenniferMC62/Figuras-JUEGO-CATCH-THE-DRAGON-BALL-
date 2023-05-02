@@ -42,6 +42,13 @@ Nivel 3     |     5 0 0 0     PUNTOS
 <br>
 <div/>
 
+# Explicación Detallada del Código
+[Explicación Detallada del Código](./C%C3%B3digoExplicaci%C3%B3n/README.md)
+
+
+<br>
+<div/>
+
 # Diagrama UML
 [Diagrama](./Diagrama%20UML/)
 
